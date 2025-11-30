@@ -16,14 +16,17 @@ int main(){
     bind(serve, (sockaddr*)&serveraddr, sizeof(serveraddr));
 
     listen(serve, 5);
-    while(true){ 
-        std::cout << "Waiting for the message..." << std::endl; 
-        int client = accept(serve, nullptr, nullptr); 
-        
-        char buffer{0}; 
-        recv(client, &buffer, 1024, 0); 
-        std::cout << "received" << buffer << std::endl; 
-        close(client); 
-    } 
+    std::cout << "Waiting for the message..." << std::endl;
+    int client = accept(serve, nullptr, nullptr); 
+    while(true){         
+        char buffer[1024] = {0};
+        int byte = recv(client, buffer, sizeof(buffer), 0); 
+        if (byte <= 0) { std::cout << "client disconnected " << std::endl; break;}
+        buffer[byte] = '\0'; 
+        /*buffer = [ h e l l o  ?  ?  ?  ?  ?  ? ... ] --> hello??#$%^&%@#$@!@!??..., 
+        so if we use : buffer[byte] = '\0'; buffer = [ h e l l o  \0  ?  ?  ?  ? ... ] -->  hello as '\0'(null) indicates end of a string*/
+        std::cout << "received: " << buffer << std::endl;
+        } 
+    close(client);
     close(serve); 
 }

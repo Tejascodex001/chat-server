@@ -1,0 +1,9 @@
+1. Understand client-server architecture ----------------------------------------- Done
+2. Writing simple server and client code (1:1) protophase ------------------------ Working on it
+3. making server stay alive and accept connections protophase -------------------- Pending
+4. Allow client to send message -------------------------------------------------- Pending
+5. Allow server to reply --------------------------------------------------------- Pending
+6. Keep the connection and client alive and test for many messages --------------- Pending
+7. Multiple clients -------------------------------------------------------------- Pending
+8. Broadcast messages ------------------------------------------------------------ Pending
+9. Disconnection handling -------------------------------------------------------- Pending

@@ -8,6 +8,7 @@ using namespace std;
 
 int main(){
     int client = socket(AF_INET, SOCK_STREAM, 0); 
+    string msg;
 
     sockaddr_in serveraddr{}; 
     serveraddr.sin_family = AF_INET; 
@@ -15,7 +16,12 @@ int main(){
     inet_pton(AF_INET, "127.0.0.1", &serveraddr.sin_addr); 
 
     connect(client, (sockaddr*)&serveraddr, sizeof(serveraddr)); 
-    std::cout << "connected to server" << std::endl; 
-    
+    while(true){
+    std::cout << "Enter a message:";
+    std::getline(std::cin, msg);
+    // std::cout << "connected to server" << std::endl; 
+    send(client, msg.c_str(), msg.size(), 0);
+    if(msg == "exit") break;
+    }
     close(client); 
 }
